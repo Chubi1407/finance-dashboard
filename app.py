@@ -10,19 +10,19 @@ from data import (
     calculate_max_drawdown,
 )
 
-# ── Page config ──
+#  Page config 
 st.set_page_config(
     page_title="Portfolio Analytics Dashboard",
     page_icon="📈",
     layout="wide",
 )
 
-# ── Header ──
+# Header
 st.title("📈 Portfolio Analytics Dashboard")
 st.markdown("Real-time portfolio performance and risk analysis.")
 st.divider()
 
-# ── Sidebar inputs ──
+# Sidebar inputs
 st.sidebar.header("Portfolio Settings")
 
 tickers_input = st.sidebar.text_input(
@@ -43,7 +43,7 @@ end_date = st.sidebar.date_input(
 
 run = st.sidebar.button("Run Analysis", type="primary", use_container_width=True)
 
-# ── Main content ──
+#Main content 
 if run:
     tickers = [t.strip().upper() for t in tickers_input.split(",") if t.strip()]
 
@@ -59,7 +59,7 @@ if run:
             sharpe = calculate_sharpe_ratio(daily_returns)
             max_dd = calculate_max_drawdown(cumulative_returns)
 
-        # ── Metrics row ──
+        #  Metrics row 
         st.subheader("Key Metrics")
         cols = st.columns(len(tickers))
         for i, ticker in enumerate(tickers):
@@ -78,7 +78,7 @@ if run:
 
         st.divider()
 
-        # ── Cumulative returns chart ──
+        # Cumulative returns chart
         st.subheader("Cumulative Returns")
         st.caption("Shows how $1 invested on the start date would have grown.")
         fig1 = px.line(
@@ -95,7 +95,7 @@ if run:
         )
         st.plotly_chart(fig1, use_container_width=True)
 
-        # ── Stock price chart ──
+        # Stock price chart
         st.subheader("Stock Price History")
         fig2 = px.line(
             prices,
@@ -110,7 +110,7 @@ if run:
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-        # ── Portfolio allocation pie chart ──
+        # Portfolio allocation pie chart 
         st.subheader("Equal-Weight Portfolio Allocation")
         allocation = {ticker: 100 / len(tickers) for ticker in tickers}
         fig3 = px.pie(
@@ -124,7 +124,7 @@ if run:
         )
         st.plotly_chart(fig3, use_container_width=True)
 
-        # ── Raw data toggle ──
+        # Raw data toggle
         with st.expander("View Raw Price Data"):
             st.dataframe(prices.style.format("${:.2f}"), use_container_width=True)
 
