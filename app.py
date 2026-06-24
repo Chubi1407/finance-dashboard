@@ -17,12 +17,12 @@ st.set_page_config(
     layout="wide",
 )
 
-# ── Header ──
+# Header 
 st.title("📈 Portfolio Analytics Dashboard")
 st.markdown("Real-time portfolio performance and risk analysis.")
 st.divider()
 
-# ── Sidebar inputs ──
+# Sidebar inputs 
 st.sidebar.header("Portfolio Settings")
 
 tickers_input = st.sidebar.text_input(
